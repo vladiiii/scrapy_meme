@@ -16,9 +16,9 @@ class MemePipeline:
         self.create_table()
 
     def create_table(self):
-        self.cur.execute("""CREATE TABLE IF NOT EXISTS memes(img_id REAL PRIMARY KEY, img TEXT)""")
+        self.cur.execute("""CREATE TABLE IF NOT EXISTS memes(img TEXT)""")
 
     def process_item(self, item, spider):
-        self.cur.execute("""INSERT OR IGNORE INTO memes VALUES (?,?,?)""", (item["img_id"], item["img"]))
+        self.cur.execute("""INSERT OR IGNORE INTO memes VALUES (?)""", (item["img"],))
         self.con.commit()
         return item
